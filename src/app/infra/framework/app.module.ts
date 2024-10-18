@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from 'src/app/core/common/services/auth/auth.module';
 import { jwtConstants } from 'src/app/core/utils/jwt.config.util';
-import { FrameworkModule } from './controllers/framework.module';
+import { FrameworkModule } from './framework.module';
 
 
 @Module({

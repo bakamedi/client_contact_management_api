@@ -65,3 +65,11 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+src/app/infra/data/migrations/migration_lock.toml
+src/app/infra/data/migrations/20241013162101_hash_password_user/migration.sql
+src/app/infra/data/migrations/20241014151532_add_pets_and_medical_info/migration.sql
+src/app/infra/data/migrations/20241014154611_add_pets_and_medical_info_columns/migration.sql
+src/app/infra/data/migrations/20241018212902_email_user/migration.sql
+src/app/infra/data/migrations/20241018213928_data_user/migration.sql
+src/app/infra/data/migrations/20241018214350_role_user/migration.sql
+src/app/infra/data/migrations/20241018224333_null_hashpassword_user/migration.sql

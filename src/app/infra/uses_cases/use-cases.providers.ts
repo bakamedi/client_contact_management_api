@@ -2,6 +2,7 @@ import {
     LoginUseCase,
     RegisterUseCase,
     RefreshTokenUseCase,
+    CreateUserUseCase,
 } from "./index";
 
 
@@ -10,4 +11,5 @@ export const useCasesProviders = [
     LoginUseCase,
     RegisterUseCase,
     RefreshTokenUseCase,
+    CreateUserUseCase,
 ];
