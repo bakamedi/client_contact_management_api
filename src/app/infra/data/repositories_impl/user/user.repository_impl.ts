@@ -2,12 +2,35 @@ import { PrismaService } from '@infra/data/prisma/prisma.service';
 import { UserRepository } from '@infra/domain/respositories/users/user.repository';
 import { UpdateUserDTO } from '@infra/framework/controllers/user/dto/update-user.dto';
 import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, UserRole } from '@prisma/client';
 
 @Injectable()
 export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly prismaService: PrismaService) { }
 
+  async getAll(): Promise<Prisma.UserGetPayload<any>[]> {
+    return await this.prismaService.user.findMany({
+      where: {
+        role: UserRole.USER,
+      }
+    });
+  }
+
+  async getById(
+    idUser: string,
+  ): Promise<Prisma.UserGetPayload<any>> {
+    const userFound = await this.prismaService.user.findFirst({
+      where: {
+        id: idUser,
+      },
+    });
+
+    if (!userFound) {
+      throw new BadRequestException('User not found (request)');
+    } else {
+      return userFound;
+    }
+  }
 
   async create(
     data: Prisma.UserCreateInput,
@@ -43,7 +66,7 @@ export class UserRepositoryImpl implements UserRepository {
       cellPhoneNumber: userFound.cellPhoneNumber,
       profileImage: userFound.profileImage,
       ...updateUserDTO,
-  };
+    };
 
     const result = await this.prismaService.user.update({
       where: {
@@ -66,7 +89,7 @@ export class UserRepositoryImpl implements UserRepository {
       },
     });
     if (!result) {
-      throw new InternalServerErrorException('Email User not found (request)');
+      throw new InternalServerErrorException('User Email not found (request)');
     } else {
       return result;
     }

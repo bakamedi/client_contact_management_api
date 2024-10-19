@@ -1,4 +1,4 @@
-import { CreateUserUseCase, UpdateUserUseCase } from "@infra/uses_cases";
+import { CreateUserUseCase, GetByIdUserUseCase, GetAllUserUseCase, UpdateUserUseCase } from "@infra/uses_cases";
 import { Body, Controller, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/app/core/base/shared/guards/jwt-auth.guard";
@@ -13,6 +13,9 @@ export class UserController {
     constructor(
         private readonly createUserUseCase: CreateUserUseCase,
         private readonly updateUserUseCase: UpdateUserUseCase,
+        private readonly getByIdUserUseCase: GetByIdUserUseCase,
+        private readonly getAllUserUseCase: GetAllUserUseCase,
+
 
     ) { }
 
@@ -29,6 +32,7 @@ export class UserController {
     @Get()
     async findAll(
     ) {
+        return await this.getAllUserUseCase.execute();
     }
 
     @Get(':id')
@@ -36,6 +40,9 @@ export class UserController {
     async findOne(
         @Param('id') idUser: string,
     ) {
+        return await this.getByIdUserUseCase.execute({
+            idUser,
+        });
     }
 
     @Put(':id')

@@ -1,9 +1,9 @@
+import { Injectable } from '@nestjs/common';
+
 import { BcryptRepository } from '@infra/domain/respositories/bcrypt/bcrypt.repository';
 import { UserRepository } from '@infra/domain/respositories/users/user.repository';
-
 import { RegisterDTO } from '@infra/framework/controllers/auth/dto/register.dto';
-import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, UserRole } from '@prisma/client';
 import { UseCase } from 'src/app/core/base/shared/interfaces/use.case';
 import { AuthService } from 'src/app/core/common/services/auth/auth.service';
 
@@ -40,7 +40,7 @@ export class RegisterUseCase implements UseCase<RegisterDTO, RegisterCaseRespons
             email,
             names,
             lastName,
-            role,
+            role: UserRole.ADMIN,
             phoneNumber,
             cellPhoneNumber,
             profileImage,

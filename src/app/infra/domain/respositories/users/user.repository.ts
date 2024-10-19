@@ -10,6 +10,13 @@ export abstract class UserRepository {
     email: string,
   ): Promise<Prisma.UserGetPayload<any>>;
 
+  abstract getById(
+    idUser: string,
+  ): Promise<Prisma.UserGetPayload<any>>;
+
+  abstract getAll(
+  ): Promise<Prisma.UserGetPayload<any>[]>;
+
   abstract update(
     idUser: string,
     updateUserDTO: UpdateUserDTO,

@@ -4,6 +4,8 @@ import {
     RefreshTokenUseCase,
     CreateUserUseCase,
     UpdateUserUseCase,
+    GetByIdUserUseCase,
+    GetAllUserUseCase,
 } from "./index";
 
 
@@ -14,4 +16,6 @@ export const useCasesProviders = [
     RefreshTokenUseCase,
     CreateUserUseCase,
     UpdateUserUseCase,
+    GetByIdUserUseCase,
+    GetAllUserUseCase,
 ];
