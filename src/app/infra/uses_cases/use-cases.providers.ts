@@ -6,6 +6,7 @@ import {
     UpdateUserUseCase,
     GetByIdUserUseCase,
     GetAllUserUseCase,
+    DeleteByIdUserUseCase,
 } from "./index";
 
 
@@ -18,4 +19,5 @@ export const useCasesProviders = [
     UpdateUserUseCase,
     GetByIdUserUseCase,
     GetAllUserUseCase,
+    DeleteByIdUserUseCase,
 ];

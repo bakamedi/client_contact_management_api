@@ -75,7 +75,7 @@ export class UserRepositoryImpl implements UserRepository {
       data,
     });
     if (!result) {
-      throw new InternalServerErrorException('User not found (request)');
+      throw new BadRequestException('User not found (request)');
     } else {
       return result;
     }
@@ -89,9 +89,25 @@ export class UserRepositoryImpl implements UserRepository {
       },
     });
     if (!result) {
-      throw new InternalServerErrorException('User Email not found (request)');
+      throw new BadRequestException('User Email not found (request)');
     } else {
       return result;
+    }
+  }
+
+  async deleteById(idUser: string): Promise<boolean> {
+    try {
+      await this.prismaService.user.delete({
+        where: {
+          id: idUser,
+        },
+      });
+      return true;
+    } catch (error) {
+      if (error.code === 'P2025') {
+        return false;
+      }
+      throw error;
     }
   }
 }

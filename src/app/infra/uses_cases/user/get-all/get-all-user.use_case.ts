@@ -10,6 +10,6 @@ export class GetAllUserUseCase implements UseCase<any, Prisma.UserGetPayload<any
   ) {}
 
   async execute(): Promise<any> {
-    return await  this.userRespository.getAll();
+    return await this.userRespository.getAll();
   }
 }

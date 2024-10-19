@@ -14,6 +14,10 @@ export abstract class UserRepository {
     idUser: string,
   ): Promise<Prisma.UserGetPayload<any>>;
 
+  abstract deleteById(
+    idUser: string,
+  ): Promise<boolean>;
+
   abstract getAll(
   ): Promise<Prisma.UserGetPayload<any>[]>;
 

@@ -1,5 +1,5 @@
-import { CreateUserUseCase, GetByIdUserUseCase, GetAllUserUseCase, UpdateUserUseCase } from "@infra/uses_cases";
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
+import { CreateUserUseCase, GetByIdUserUseCase, GetAllUserUseCase, UpdateUserUseCase, DeleteByIdUserUseCase } from "@infra/uses_cases";
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/app/core/base/shared/guards/jwt-auth.guard";
 import { CreateUserDTO } from "./dto/create-user.dto";
@@ -15,8 +15,7 @@ export class UserController {
         private readonly updateUserUseCase: UpdateUserUseCase,
         private readonly getByIdUserUseCase: GetByIdUserUseCase,
         private readonly getAllUserUseCase: GetAllUserUseCase,
-
-
+        private readonly deleteByIdUserUseCase: DeleteByIdUserUseCase,
     ) { }
 
     @Post()
@@ -55,6 +54,16 @@ export class UserController {
         return await this.updateUserUseCase.execute({
             idUser,
             updateUserDTO,
+        });
+    }
+
+    @Delete(':id')
+    @ApiParam({ name: 'id', description: 'ID del usuario', type: String })
+    async delete(
+        @Param('id') idUser: string,
+    ) {
+        return await this.deleteByIdUserUseCase.execute({
+            idUser,
         });
     }
 
