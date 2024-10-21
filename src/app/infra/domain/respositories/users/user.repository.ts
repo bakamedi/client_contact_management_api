@@ -19,7 +19,7 @@ export abstract class UserRepository {
   ): Promise<boolean>;
 
   abstract getAll(
-  ): Promise<Prisma.UserGetPayload<any>[]>;
+  ): Promise<any>;
 
   abstract update(
     idUser: string,

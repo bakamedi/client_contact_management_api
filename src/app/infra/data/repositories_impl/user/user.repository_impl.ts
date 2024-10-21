@@ -8,11 +8,19 @@ import { Prisma, UserRole } from '@prisma/client';
 export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly prismaService: PrismaService) { }
 
-  async getAll(): Promise<Prisma.UserGetPayload<any>[]> {
+  async getAll(): Promise<any> {
     return await this.prismaService.user.findMany({
       where: {
         role: UserRole.USER,
-      }
+      },
+      select: {
+        id: true,
+        names: true,
+        lastName: true,
+        phoneNumber: true,
+        cellPhoneNumber: true,
+        profileImage: true,
+      },
     });
   }
 
