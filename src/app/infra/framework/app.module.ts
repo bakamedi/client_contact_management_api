@@ -14,7 +14,7 @@ import { FrameworkModule } from './framework.module';
     }),
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '10000h' },
     }),
     FrameworkModule,
     DatabaseModule,

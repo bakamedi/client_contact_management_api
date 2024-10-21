@@ -21,7 +21,7 @@ enum UserRole {
 
 model User {
   id              String   @id @default(uuid())
-  hashPassword    String?   @map("hash_password")
+  hashPassword    String?  @map("hash_password")
   role            UserRole @map("type_account")
   email           String?  @unique
   names           String

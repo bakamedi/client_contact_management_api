@@ -68,11 +68,11 @@ export class UserRepositoryImpl implements UserRepository {
     }
 
     const data: Prisma.UserUpdateInput = {
-      names: userFound.names,
-      lastName: userFound.lastName,
-      phoneNumber: userFound.phoneNumber,
-      cellPhoneNumber: userFound.cellPhoneNumber,
-      profileImage: userFound.profileImage,
+      names: updateUserDTO.names,
+      lastName: updateUserDTO.lastName,
+      phoneNumber: updateUserDTO.phoneNumber,
+      cellPhoneNumber: updateUserDTO.cellPhoneNumber,
+      profileImage: updateUserDTO.profileImage,
       ...updateUserDTO,
     };
 
