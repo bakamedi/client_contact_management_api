@@ -9,7 +9,9 @@ import { AuthService } from 'src/app/core/common/services/auth/auth.service';
 
 
 export interface RegisterCaseResponse {
-    email: string;
+    name: string,
+    lastName: string,
+    profileImage: string,
     access_token: string;
     refresh_token: string;
 }
@@ -54,7 +56,9 @@ export class RegisterUseCase implements UseCase<RegisterDTO, RegisterCaseRespons
         );
 
         return {
-            email: result.email,
+            name: result.names,
+            lastName: result.lastName,
+            profileImage: result.profileImage,
             access_token: credentials.access_token,
             refresh_token: credentials.refresh_token,
         };
