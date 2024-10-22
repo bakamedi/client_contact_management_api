@@ -28,7 +28,7 @@ model User {
   lastName        String   @map("last_name")
   phoneNumber     String?  @map("phone_number")
   cellPhoneNumber String?  @map("cell_phone_number")
-  profileImage    String?  @map("profile_image")
+  profileImage    String?  @default("") @map("profile_image")
   createDate      DateTime @default(now()) @map("create_date")
   updateDate      DateTime @default(now()) @map("update_date")
 }

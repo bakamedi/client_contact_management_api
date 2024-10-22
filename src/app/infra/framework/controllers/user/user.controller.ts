@@ -1,14 +1,18 @@
 import { CreateUserUseCase, GetByIdUserUseCase, GetAllUserUseCase, UpdateUserUseCase, DeleteByIdUserUseCase } from "@infra/uses_cases";
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/app/core/base/shared/guards/jwt-auth.guard";
 import { CreateUserDTO } from "./dto/create-user.dto";
 import { UpdateUserDTO } from "./dto/update-user.dto";
-import { GetUser } from "src/app/core/common/decorators/get-user.decorator";
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
+// Definir la ruta donde se guardarán las imágenes
+const uploadPath = './uploads/';  // Carpeta donde se guardarán los archivos
 @ApiTags('user')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 @Controller('user')
 export class UserController {
     constructor(
@@ -66,6 +70,23 @@ export class UserController {
         return await this.deleteByIdUserUseCase.execute({
             idUser,
         });
+    }
+
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file', {
+        storage: diskStorage({
+            destination: uploadPath,  // Directorio donde se guardará la imagen
+            filename: (req, file, callback) => {
+                // Crear un nombre único para el archivo
+                const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+                const ext = extname(file.originalname);  // Obtener la extensión original del archivo
+                const filename = `${uniqueSuffix}${ext}`;  // Generar el nuevo nombre de archivo
+                callback(null, filename);  // Guardar el archivo con el nuevo nombre
+            },
+        }),
+    }))
+    uploadFile(@UploadedFile() file: any) {
+        return { url: file.filename };
     }
 
 }

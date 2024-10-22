@@ -59,12 +59,16 @@ pids
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
+# Imagenes de los usuarios
+uploads/*
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+src/app/infra/data/migrations/*
 src/app/infra/data/migrations/migration_lock.toml
 src/app/infra/data/migrations/20241013162101_hash_password_user/migration.sql
 src/app/infra/data/migrations/20241014151532_add_pets_and_medical_info/migration.sql

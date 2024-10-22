@@ -5,10 +5,13 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './app/core/common/exceptions/exception-filter';
 import { ResponseInterceptor } from './app/core/common/exceptions/response.interceptor';
 import { PrismaInterceptor } from './app/core/common/exceptions/prisma.interceptor';
+import { join } from 'path';
+import { NestExpressApplication } from '@nestjs/platform-express';
+
 
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.setGlobalPrefix('v1/api');
   app.useGlobalPipes(
     new ValidationPipe({
@@ -16,6 +19,9 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
+  app.useStaticAssets(join(__dirname, '..', 'uploads'), {
+    prefix: '/uploads/',  // Prefijo para la URL pública
+  });
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new PrismaInterceptor());
   app.useGlobalInterceptors(new ResponseInterceptor());
