@@ -3,7 +3,7 @@
 
 # Client Management Api
 
-## Prerrequisitos
+## Pre requisitos
 
 - Tener instalado Nestjs en tu sistema. Puedes encontrar instrucciones de instalación [aquí](https://docs.nestjs.com/).
 - Si no tienes Docker instalado, puedes descargarlo e instalarlo desde [Docker’s official website][https://www.docker.com/products/docker-desktop/]
