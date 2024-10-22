@@ -21,6 +21,9 @@ export class UserRepositoryImpl implements UserRepository {
         cellPhoneNumber: true,
         profileImage: true,
       },
+      orderBy: {
+        names: 'asc', 
+      },
     });
   }
 
