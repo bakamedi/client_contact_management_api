@@ -24,7 +24,7 @@
 1. Clona este repositorio en tu máquina local usando Git:
 
     ```bash
-    git clone https://github.com/bakamedi/client_management.git
+    git clone https://github.com/bakamedi/client_contact_management_api.git
     ```
 
 2. Levanta el docker con este comando:
